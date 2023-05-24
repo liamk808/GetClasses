@@ -1,9 +1,47 @@
 <html>
 
 <head>
-  <title>Engineering Club Class Form</title>
+  <title>TT Class Form</title>
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 8px 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
     table {
+      width: 100%;
       border-collapse: collapse;
     }
 
@@ -11,6 +49,29 @@
     td {
       border: 1px solid black;
       padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    .delete-cell {
+      text-align: center;
+    }
+
+    .delete-button {
+      padding: 6px 10px;
+      background-color: #ff4136;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .delete-button:hover {
+      background-color: #e6281c;
     }
   </style>
 </head>
@@ -18,8 +79,8 @@
 <body onload="retrieveJSONData()">
   <h1>Engineering Club Class Form</h1>
 
-  <label for="firstname">Name:</label>
-  <input type="text" id="firstname" name="firstname">
+  <label for="firstname" style="font-weight: bold;">Your Name:</label>
+  <input type="text" id="firstname" name="firstname" style="border: 2px solid #000000; padding: 8px; border-radius: 4px;">
 
   <form id="class-form" onkeydown="handleEnterKeyPress(event)">
     <label for="department">Department:</label>
