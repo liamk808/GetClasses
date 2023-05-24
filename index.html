@@ -32,6 +32,20 @@
 
     <br>
 
+    <label for="year">Year:</label>
+    <input type="text" id="year" name="year">
+
+    <br>
+
+    <label for="term">Term:</label>
+    <select id="term">
+      <option value="Fall">Fall</option>
+      <option value="Winter">Winter</option>
+      <option value="Spring">Spring</option>
+    </select>
+
+    <br>
+
     <label for="core1">Core Requirement:</label>
     <select id="core1">
       <option value="NA">NA</option>
@@ -90,6 +104,8 @@
           <th>Department</th>
           <th>Course Number</th>
           <th>Course Title</th>
+          <th>Term</th>
+          <th>Year</th>
           <th>Core1</th>
           <th>Core2</th>
           <th>Delete</th> <!-- New delete header -->
@@ -129,12 +145,16 @@
       var selectedClassesTable = document.getElementById("selected-classes").getElementsByTagName('tbody')[0];
       var core1Input = document.getElementById("core1");
       var core2Input = document.getElementById("core2");
+      var yearInput = document.getElementById("year");
+      var termInput = document.getElementById("term");
 
       // Get the values entered by the user for department and course
       var department = departmentInput.value.toUpperCase();
       var course = courseInput.value;
       var core1 = core1Input.value;
       var core2 = core2Input.value;
+      var year = yearInput.value;
+      var term = termInput.value;
 
       // Get the course title based on the department and course number
       var courseTitle = getCourseTitle(department, course);
@@ -158,15 +178,19 @@
           var departmentCell = row.insertCell(0);
           var courseNumCell = row.insertCell(1);
           var courseTitleCell = row.insertCell(2);
-          var core1Cell = row.insertCell(3);
-          var core2Cell = row.insertCell(4);
-          var deleteCell = row.insertCell(5); // Insert a cell for the delete button
+          var yearCell = row.insertCell(3);
+          var termCell = row.insertCell(4);
+          var core1Cell = row.insertCell(5);
+          var core2Cell = row.insertCell(6);
+          var deleteCell = row.insertCell(7); // Insert a cell for the delete button
 
           departmentCell.textContent = department;
           courseNumCell.textContent = course;
           courseTitleCell.textContent = courseTitle;
           core1Cell.textContent = core1;
           core2Cell.textContent = core2;
+          termCell.textContent = term;
+          yearCell.textContent = year;
 
           var deleteButton = document.createElement("button"); // Create the delete button element
           deleteButton.textContent = "x"; // Set the button text to "x"
