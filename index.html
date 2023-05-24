@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -17,12 +16,10 @@
 </head>
 
 <body onload="retrieveJSONData()">
-  </bodyonload>
   <h1>Engineering Club Class Form</h1>
 
   <label for="firstname">Name:</label>
   <input type="text" id="firstname" name="firstname">
-
 
   <form id="class-form" onkeydown="handleEnterKeyPress(event)">
     <label for="department">Department:</label>
@@ -95,6 +92,7 @@
           <th>Course Title</th>
           <th>Core1</th>
           <th>Core2</th>
+          <th>Delete</th> <!-- New delete header -->
         </tr>
       </thead>
       <tbody></tbody>
@@ -162,12 +160,21 @@
           var courseTitleCell = row.insertCell(2);
           var core1Cell = row.insertCell(3);
           var core2Cell = row.insertCell(4);
+          var deleteCell = row.insertCell(5); // Insert a cell for the delete button
 
           departmentCell.textContent = department;
           courseNumCell.textContent = course;
           courseTitleCell.textContent = courseTitle;
           core1Cell.textContent = core1;
           core2Cell.textContent = core2;
+
+          var deleteButton = document.createElement("button"); // Create the delete button element
+          deleteButton.textContent = "x"; // Set the button text to "x"
+          deleteButton.addEventListener("click", function () { // Add a click event listener
+            var row = this.parentNode.parentNode; // Get the parent row
+            row.parentNode.removeChild(row); // Remove the row from the table
+          });
+          deleteCell.appendChild(deleteButton); // Append the delete button to the delete cell
 
           departmentInput.value = "";
           courseInput.value = "";
@@ -200,29 +207,6 @@
       }
     }
 
-    // Function to handle form submission
-    /*     document.getElementById("class-form").addEventListener("submit", function (event) {
-          event.preventDefault(); // Prevents the form from submitting normally
-    
-          // Retrieve the selected classes from the table
-          var selectedClassesTable = document.getElementById("selected-classes").getElementsByTagName("tbody")[0];
-          var selectedClasses = [];
-    
-          for (var i = 0; i < selectedClassesTable.rows.length; i++) {
-            var department = selectedClassesTable.rows[i].cells[0].textContent;
-            var course = selectedClassesTable.rows[i].cells[1].textContent;
-            selectedClasses.push(department + " - " + course);
-          }
-    
-          // You can perform additional processing or send the selected classes to a server here
-          console.log("Selected Classes:", selectedClasses);
-    
-          // Reset the form and selected classes table
-          selectedClassesTable.innerHTML = "";
-          document.getElementById("department").value = "";
-          document.getElementById("course").value = "";
-        }); */
-
     function downloadCSV() {
       // Retrieve the table element
       var table = document.getElementById('selected-classes');
@@ -237,11 +221,11 @@
       for (var i = 0; i < table.rows.length; i++) {
         var row = [];
 
-        //Insert Users Name in first column
+        // Insert User's Name in the first column
         row.push('"' + name + '"');
 
         // Iterate over the table cells in each row
-        for (var j = 0; j < table.rows[i].cells.length; j++) {
+        for (var j = 0; j < table.rows[i].cells.length - 1; j++) { // Exclude the last delete cell
           // Get the cell value and push it to the row array
           var cellValue = table.rows[i].cells[j].textContent.trim();
           row.push('"' + cellValue + '"');
@@ -270,8 +254,6 @@
       // Remove the link element from the document body
       document.body.removeChild(link);
     }
-
-
   </script>
   <script type="application/json" id="json-data">
   {
