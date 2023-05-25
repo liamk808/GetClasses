@@ -8,9 +8,10 @@
 <body onload="retrieveJSONData()">
   <h1>Engineering Club Class Form</h1>
 
-  <label for="firstname" style="font-weight: bold;">Your Name:</label>
-  <input type="text" id="firstname" name="firstname"
-    style="border: 2px solid #000000; padding: 8px; border-radius: 4px;">
+  <form id="name-container">
+    <label for="firstname" style="font-weight: bold;">Your Name:</label>
+    <input type="text" id="firstname" name="firstname">
+  </form>
 
   <form id="class-form" onkeydown="handleEnterKeyPress(event)">
     <label for="department">Department:</label>
@@ -38,7 +39,7 @@
 
     <br>
 
-    <label for="core1">Core Requirement:</label>
+    <label for="core1">Core Requirement 1:</label>
     <select id="core1">
       <option value=""></option>
       <option value="CTW I">CTW I</option>
@@ -87,9 +88,9 @@
     <br>
 
     <button type="button" onclick="addClass()">Add Class</button>
+  </form>
 
-    <br><br>
-
+  <div id="table-container">
     <table id="selected-classes">
       <thead>
         <tr>
@@ -105,11 +106,11 @@
       </thead>
       <tbody></tbody>
     </table>
+  </div>
 
-    <br>
+  <br>
 
-    <button type="button" onclick="downloadCSV()">Download CSV</button>
-  </form>
+  <button type="button" onclick="downloadCSV()">Download CSV</button>
 
   <script>
     // Global variable to store the JSON data
