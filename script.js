@@ -8,19 +8,28 @@ function retrieveJSONData() {
         .then(response => response.json())
         .then(data => {
             jsonData = data;
-            console.log(data);
+            // console.log(data);
         })
         .catch(error => {
             console.error('Error:', error);
         })
-    // Call the function that depends on the JSON data
-    onPageLoad();
-}
-
-// Function to be executed when the HTML page is loaded
-function onPageLoad() {
-    // Code that depends on the JSON data embedded in the HTML file
-    console.log(jsonData);
+    //fetch usernames from JSON
+    fetch('names.json')
+        .then(response => response.json())
+        .then(data => {
+            var namesDropdown = document.getElementById('firstname');
+        //    console.log(data);
+            // Iterate over the names and create an option element for each name
+            data.Names.forEach(name => {
+                var option = document.createElement('option');
+                option.value = name;
+                option.textContent = name;
+                namesDropdown.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 
 // Function to add a class to the selected classes table
@@ -50,13 +59,23 @@ function addClass() {
         return;
     }
 
+    if (professor === "") {
+        alert("Input a Professor");
+        return;
+    }
+
     if (term === "") {
         alert("Input a Term");
         return;
     }
 
+    if (isNaN(year)){
+        alert("Input a Year");
+        return;
+    }
+
     if (year < "10" || year > "99") {
-        alert("Year must be from 01-99");
+        alert("Year must be from 10-99");
         return;
     }
 
@@ -82,12 +101,12 @@ function addClass() {
             var departmentCell = row.insertCell(0);
             var courseNumCell = row.insertCell(1);
             var courseTitleCell = row.insertCell(2);
-            var yearCell = row.insertCell(3);
+            var professorCell = row.insertCell(3);
             var termCell = row.insertCell(4);
-            var core1Cell = row.insertCell(5);
-            var core2Cell = row.insertCell(6);
-            var deleteCell = row.insertCell(7); // Insert a cell for the delete button
-            var professorCell = row.insertCell(8);
+            var yearCell = row.insertCell(5);
+            var core1Cell = row.insertCell(6);
+            var core2Cell = row.insertCell(7);
+            var deleteCell = row.insertCell(8); // Insert a cell for the delete button
 
             departmentCell.textContent = department;
             courseNumCell.textContent = course;
@@ -203,25 +222,5 @@ function downloadCSV() {
     document.body.removeChild(link);
 }
 
-// Function to retrieve the names from the JSON file and populate the dropdown
-function populateNamesDropdown() {
-    fetch('names.json')
-        .then(response => response.json())
-        .then(data => {
-            var namesDropdown = document.getElementById('firstname');
-
-            // Iterate over the names and create an option element for each name
-            data.Names.forEach(name => {
-                var option = document.createElement('option');
-                option.value = name;
-                option.textContent = name;
-                namesDropdown.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
-
 // Call the function to populate the dropdown when the page is loaded
-window.onload = populateNamesDropdown;
+window.onload = retrieveJSONData;
