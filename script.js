@@ -33,6 +33,7 @@ function addClass() {
     var core2Input = document.getElementById("core2");
     var yearInput = document.getElementById("year");
     var termInput = document.getElementById("term");
+    var professorInput = document.getElementById("professor");
 
     // Get the values entered by the user for department and course
     var department = departmentInput.value.toUpperCase();
@@ -41,6 +42,7 @@ function addClass() {
     var core2 = core2Input.value;
     var term = termInput.value;
     var year = parseInt(yearInput.value, 10); // Parse the year as an integer
+    var professor = professorInput.value;
 
     //Check if inputs are filled
     if (year === "") {
@@ -85,6 +87,7 @@ function addClass() {
             var core1Cell = row.insertCell(5);
             var core2Cell = row.insertCell(6);
             var deleteCell = row.insertCell(7); // Insert a cell for the delete button
+            var professorCell = row.insertCell(8);
 
             departmentCell.textContent = department;
             courseNumCell.textContent = course;
@@ -93,6 +96,7 @@ function addClass() {
             core2Cell.textContent = core2;
             termCell.textContent = term;
             yearCell.textContent = year;
+            professorCell.textContent = professor;
 
             var deleteButton = document.createElement("button"); // Create the delete button element
             deleteButton.textContent = "x"; // Set the button text to "x"
@@ -109,6 +113,7 @@ function addClass() {
             termInput.value = "";
             core1Input.value = "";
             core2Input.value = "";
+            professorInput.value = "";
         } else {
             alert("Class already selected");
         }
